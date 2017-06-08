@@ -1,6 +1,7 @@
 var controler = argument0;
 
 var activeBlockArray = controler.activeShape;
+scr_clearDebugStr();
 for(var i=0;i<array_length_1d(activeBlockArray);i++){
     var block = activeBlockArray[i];
     var xIndex = scr_getIndexByPos(block.x);
@@ -17,10 +18,8 @@ for(var i=0;i<ds_list_size(allRemoveBlockList);i++){
     var blockListArray = scr_splitToArray(removeBlockStr,";");
     for(var j = 0;j<array_length_1d(blockListArray);j++){
         pos = scr_splitToArray(blockListArray[j],"_");
-        var xRmIndex = pos[0];
-        var yRmIndex = pos[1];
-        controler.allBlock2dArray[yRmIndex,xRmIndex] = 0;
-        blockId = instance_position(scr_getPosByIndex(xRmIndex), scr_getPosByIndex(yRmIndex), square_obj);
+        controler.allBlock2dArray[ pos[1], pos[0]] = 0;
+        var blockId = scr_getBlockByPos(pos);
         if (blockId != noone){
             with(blockId){
                 instance_destroy();

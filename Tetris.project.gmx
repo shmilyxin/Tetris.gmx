@@ -29,9 +29,11 @@
       <script>scripts\scr_splitTo2DArray.gml</script>
       <script>scripts\scr_changeOffsetToPosArray.gml</script>
       <script>scripts\scr_getIndexByPos.gml</script>
+      <script>scripts\scr_arrayToStr.gml</script>
     </scripts>
     <scripts name="block">
       <script>scripts\scr_getBlockObjByKey.gml</script>
+      <script>scripts\scr_getBlockByPos.gml</script>
       <script>scripts\scr_getBlockByKey.gml</script>
       <script>scripts\scr_getShape.gml</script>
       <script>scripts\scr_shapeMove.gml</script>
@@ -57,6 +59,14 @@
         <script>scripts\scr_findRemoveBlockList.gml</script>
         <script>scripts\src_blockDecide.gml</script>
         <script>scripts\scr_checkClearType.gml</script>
+        <scripts name="aplus">
+          <script>scripts\scr_insertAroundBlock.gml</script>
+          <script>scripts\scr_checkFloating.gml</script>
+          <script>scripts\scr_getMinCostMap.gml</script>
+          <script>scripts\scr_insertNextBlock.gml</script>
+          <script>scripts\scr_checkTerListContant.gml</script>
+        </scripts>
+        <script>scripts\scr_getFloatingBlock.gml</script>
       </scripts>
     </scripts>
     <scripts name="debug">

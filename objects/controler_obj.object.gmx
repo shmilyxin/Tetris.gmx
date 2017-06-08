@@ -108,6 +108,7 @@ scr_initGame(id);
         }
    }else{
       src_blockDecide(id);
+      scr_getFloatingBlock(id);
       activeShape = scr_getShape(nextShape,activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
       activeShapeCode = nextShape;
       activeShapeMode = 1;
