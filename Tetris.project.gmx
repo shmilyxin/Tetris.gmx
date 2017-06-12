@@ -55,18 +55,18 @@
         <script>scripts\scr_changeShape.gml</script>
       </scripts>
       <scripts name="decide">
+        <scripts name="aplus">
+          <script>scripts\scr_checkFloating.gml</script>
+          <script>scripts\scr_checkTerListContant.gml</script>
+          <script>scripts\scr_getMinCostMap.gml</script>
+          <script>scripts\scr_insertAroundBlock.gml</script>
+          <script>scripts\scr_insertNextBlock.gml</script>
+        </scripts>
+        <script>scripts\scr_checkClearType.gml</script>
         <script>scripts\scr_findRemoveBlock.gml</script>
         <script>scripts\scr_findRemoveBlockList.gml</script>
-        <script>scripts\src_blockDecide.gml</script>
-        <script>scripts\scr_checkClearType.gml</script>
-        <scripts name="aplus">
-          <script>scripts\scr_insertAroundBlock.gml</script>
-          <script>scripts\scr_checkFloating.gml</script>
-          <script>scripts\scr_getMinCostMap.gml</script>
-          <script>scripts\scr_insertNextBlock.gml</script>
-          <script>scripts\scr_checkTerListContant.gml</script>
-        </scripts>
         <script>scripts\scr_getFloatingBlock.gml</script>
+        <script>scripts\src_blockDecide.gml</script>
       </scripts>
     </scripts>
     <scripts name="debug">

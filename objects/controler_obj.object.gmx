@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>activeShape = undefined;
+floatingShapeList = ds_list_create();
 activeShapeCode = undefined;
 activeShapeMode = 1;
 gameSpeed = 20;
