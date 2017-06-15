@@ -22,17 +22,27 @@ var returnMap = undefined;
 while(true){
     
     var minCostMap = scr_getMinCostMap(allRouteMapList);
-    if(minCostMap[? 'totalCost']>999){
-       returnMap = minCostMap;
-       break;
-    }
-    if(minCostMap[? 'distance']==0){
-       ds_map_destroy(minCostMap);
-       returnMap = undefined;
-       break;
-    }
+    
     scr_insertAroundBlock(allRouteMapList,minCostMap,allBlock2dArray,endY);
-   
+    if(ds_list_size(allRouteMapList)==0){
+        returnMap = minCostMap;
+        break;
+    }else{
+        var arrivalFlag = false;
+        for(var i = 0;i<ds_list_size(allRouteMapList);i++){
+            tempMap = allRouteMapList[|i];
+            if(real(tempMap[? 'distance'])==0){
+                
+                arrivalFlag = true;
+                break;
+            }
+        }
+        if(arrivalFlag){
+            ds_map_destroy(minCostMap);
+            returnMap = undefined;
+            break;
+        }   
+    }
     ds_map_destroy(minCostMap);
 }
 

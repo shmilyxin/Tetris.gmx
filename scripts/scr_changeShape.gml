@@ -2,14 +2,17 @@ var controler = argument0;
 var activeShapeMode = controler.activeShapeMode;
 var activeShapeCode = controler.activeShapeCode;
 var posArray;
+if(is_undefined(controler.activeShape)){
+    return 0;
+}
 var startPos = scr_getBaseStartPos(controler.activeShape,activeShapeCode,activeShapeMode);
     var startX = startPos[0];
     var startY = startPos[1];
     var leftOffsetX = startX-30;
     var rightOffsetX = startX+30;
     var offsetY = startPos[1];
-    var leftOffsetCollision = scr_checkPointCollision(leftOffsetX,offsetY,controler.activeShape);
-    var rightOffsetCollision = scr_checkPointCollision(rightOffsetX,offsetY,controler.activeShape);
+    var leftOffsetCollision = scr_checkPointCollision(leftOffsetX,offsetY,controler.allBlock2dArray);
+    var rightOffsetCollision = scr_checkPointCollision(rightOffsetX,offsetY,controler.allBlock2dArray);
     if(leftOffsetCollision&&!rightOffsetCollision){
         startX += 30;
     }else if(!leftOffsetCollision&&rightOffsetCollision){
@@ -35,7 +38,7 @@ var startPos = scr_getBaseStartPos(controler.activeShape,activeShapeCode,activeS
     }
 var collisionFlag = false;
     for(var i = 0;i<array_height_2d(posArray);i++){
-        collisionFlag = scr_checkPointCollision(posArray[i,0],posArray[i,1],controler.activeShape);
+        collisionFlag = scr_checkPointCollision(posArray[i,0],posArray[i,1],controler.allBlock2dArray);
         if(collisionFlag){
             controler.activeShapeMode = activeShapeMode;
             break;

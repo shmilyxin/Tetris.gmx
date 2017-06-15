@@ -15,14 +15,9 @@ blockIndex[0]=newX;
 blockIndex[1]=newY;
 var cost = totalCost;
 var distance = abs(blockIndex[1]-endIndex);
-if(blockValue!=0){
-    cost += 1;
-}else{
-    cost += 999;
-    distance = 999;
-}
 var blockStr = scr_arrayToStr(blockIndex,2,"_")
-if(!scr_checkTerListContant(routeList,blockStr)){
+if(!scr_checkTerListContant(routeList,blockStr)&&blockValue!=0){
+    cost += 1;
     ds_list_add(routeList,blockStr);
     ds_map_add_list(routeInfoMap,'routeList',routeList);
     ds_map_add(routeInfoMap,'totalCost',cost);

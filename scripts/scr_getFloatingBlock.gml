@@ -1,6 +1,7 @@
 var controler = argument0;
 var blockArray = controler.allBlock2dArray;
 var totalList = ds_list_create();
+var totoalFloatingShapeList = ds_list_create();
 for(var i = 1;i<array_height_2d(blockArray);i++){
     for(var j = 1;j<array_length_2d(blockArray,i);j++){
         if(blockArray[i,j]!=0){
@@ -26,7 +27,7 @@ for(var i = 1;i<array_height_2d(blockArray);i++){
                 if(contantFlag){
                     ds_list_destroy(floatShapeList);
                 }else{
-                   ds_list_add(controler.floatingShapeList,floatShapeList); 
+                   ds_list_add(totoalFloatingShapeList,floatShapeList); 
                 }
             }
         }
@@ -36,23 +37,23 @@ for(var i = 1;i<array_height_2d(blockArray);i++){
 if(ds_list_size(totalList)>0){
     for(var i = 0;i<ds_list_size(totalList);i++){
        var posArray = scr_splitToArray(totalList[|i],'_');
-       //controler.allBlock2dArray[posArray[1],posArray[0]] = 0;
+       controler.allBlock2dArray[posArray[1],posArray[0]] = 0;
        var blockId = scr_getBlockByPos(posArray);
-       scr_addDebugStr(totalList[|i],5);
-       if(blockId != noone){
-            with(blockId){
-                
-                
-            }
-       }
+       
     }
 }
-if(ds_list_size(controler.floatingShapeList)>0){
-    for(var i = 0;i<ds_list_size(controler.floatingShapeList);i++){
-       var floatingShape = controler.floatingShapeList[|i];
+if(ds_list_size(totoalFloatingShapeList)>0){
+    for(var i = 0;i<ds_list_size(totoalFloatingShapeList);i++){
+       var floatingShape = totoalFloatingShapeList[|i];
+       var floatingShapeArray; 
        for(var j = 0;j<ds_list_size(floatingShape);j++){
-        scr_addDebugStr(string(j)+":"+string(floatingShape[|j]),5);
+            var posArray = scr_splitToArray(floatingShape[|j],'_');
+            var blockId = scr_getBlockByPos(posArray);
+            if(blockId != noone){
+                floatingShapeArray[j]=blockId; 
+            }
        }
+       ds_list_add(controler.floatingShapeList,floatingShapeArray);
     }
 }
 return totalList;

@@ -1,8 +1,9 @@
 var xPoint = argument0;
 var yPoint = argument1;
-var activeShape = argument2;
+var allBlock2dArray = argument2;
+var xIndex = scr_getIndexByPos(xPoint);
+var yIndex = scr_getIndexByPos(yPoint);
 var collisionFlag = false;
-var collision_obj = collision_point(xPoint, yPoint,square_obj,true,true);
 if(xPoint>scr_getPosByIndex(10)||xPoint<scr_getPosByIndex(1)){
     collisionFlag = true;
     return collisionFlag;
@@ -11,10 +12,8 @@ if(yPoint>scr_getPosByIndex(20)||yPoint<scr_getPosByIndex(1)){
     collisionFlag = true;
     return collisionFlag;
 }
-if(collision_obj!=noone){
-if(!scr_arrayContainObj(activeShape,collision_obj)){
+if(allBlock2dArray[yIndex,xIndex]!=0){
     collisionFlag = true;
     return collisionFlag;
-}
 }
 return collisionFlag;

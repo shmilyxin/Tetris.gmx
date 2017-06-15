@@ -40,6 +40,7 @@ movingFlag = 0;     //是否正在移动 0为否 1为是
 moveableFlag = 1;      //是否可以移动 0为否 1为是
 xDirection = 0;
 alarm[1] = 5;
+
 scr_defGlobal();
 var debug = instance_create(0,0,debug_obj);
 ds_map_add(global.instanceMap,'debug',debug);
@@ -91,31 +92,83 @@ scr_initGame(id);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!is_undefined(activeShape)){
-   var length =  array_length_1d(activeShape);
-   var collisionFlag = false;
-    for(var i = 0;i&lt;length;i++){
-        var block = activeShape[i];
-        var nextStepY = block.y+30;
-        collisionFlag = scr_checkPointCollision(block.x,nextStepY,activeShape);
-        if(collisionFlag){
-            break;
+            <string> if(ds_list_size(floatingShapeList)&gt;0){
+    for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
+            var floatingShape = floatingShapeList[|i];
+            for(var j = 0;j&lt;array_length_1d(floatingShape);j++){
+                var block = floatingShape[j];
+                if(!is_undefined(block)){
+                    scr_addDebugStr(string(scr_getIndexByPos(block.x))+"_"+string(scr_getIndexByPos(block.y)),10);
+                }
+            }
+            
         }
-   }
-   if(!collisionFlag){
-        for(var i = 0;i&lt;length;i++){
-            var block = activeShape[i];
-            block.y+=30;
+ }
+   var decideBlocks = ds_list_create();
+   if(ds_list_size(floatingShapeList)&gt;0){
+        for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
+            var collisionFlag = false;
+            var floatingShape = floatingShapeList[|i];
+            for(var j = 0;j&lt;array_length_1d(floatingShape);j++){
+                var block = floatingShape[j];
+                var nextStepY = block.y+30;
+                collisionFlag = scr_checkPointCollision(block.x,nextStepY,id.allBlock2dArray);
+                if(collisionFlag){
+                    break;
+                }
+            }
+            if(collisionFlag){
+                for(var j = 0;j&lt;array_length_1d(floatingShape);j++){
+                    ds_list_add(decideBlocks,floatingShape[j]);
+                }
+                ds_list_delete(floatingShapeList,i);
+            }
         }
    }else{
-      src_blockDecide(id);
-      scr_getFloatingBlock(id);
-      activeShape = scr_getShape(nextShape,activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
-      activeShapeCode = nextShape;
-      activeShapeMode = 1;
-      nextShape = irandom_range(1,7);
+        var collisionFlag = false;
+        var length =  array_length_1d(activeShape);
+        for(var i = 0;i&lt;length;i++){
+            var block = activeShape[i];
+            var nextStepY = block.y+30;
+            collisionFlag = scr_checkPointCollision(block.x,nextStepY,id.allBlock2dArray);
+            if(collisionFlag){
+                break;
+            }
+        }
+        if(collisionFlag){
+            for(var j = 0;j&lt;array_length_1d(activeShape);j++){
+                ds_list_add(decideBlocks,activeShape[j]);
+            }
+            activeShape = undefined;
+        }
    }
-}
+   if(ds_list_size(decideBlocks)==0){
+    if(ds_list_size(floatingShapeList)&gt;0){
+    
+        for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
+        var shape = floatingShapeList[|i];
+            for(var j=0;j&lt;array_length_1d(shape);j++){
+                var block = shape[j];
+                block.y+=30;  
+            }    
+        }
+    }else if(activeShape!=undefined){
+        for(var i = 0;i&lt;array_length_1d(activeShape);i++){
+                var block = activeShape[i];
+                block.y+=30;  
+        }   
+    }
+   }else{
+      src_blockDecide(id,decideBlocks);
+      scr_getFloatingBlock(id);
+      if(ds_list_size(floatingShapeList)==0){
+        activeShape = scr_getShape(nextShape,activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
+        activeShapeCode = nextShape;
+        activeShapeMode = 1;
+        nextShape = irandom_range(1,7);
+      }
+   }
+ds_list_destroy(decideBlocks);
 alarm[0] = gameSpeed;
 </string>
           </argument>
@@ -139,7 +192,18 @@ alarm[0] = gameSpeed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check(ord('D'))
+            <string>scr_clearDebugStr();
+for(var i = 1;i&lt;21;i++){
+    for(var j = 1;j&lt;11;j++){
+        if(allBlock2dArray[i,j] == 0){
+          scr_addDebugStr(string(allBlock2dArray[i,j]),10);
+        }else{
+          scr_addDebugStr(string(allBlock2dArray[i,j]),10);
+        }
+       
+    }
+}
+if keyboard_check(ord('D'))
 {
    rightFlag = 1;
 }else{

@@ -1,16 +1,16 @@
 var controler = argument0;
+var decideBlocks = argument1;
 
-var activeBlockArray = controler.activeShape;
-scr_clearDebugStr();
-for(var i=0;i<array_length_1d(activeBlockArray);i++){
-    var block = activeBlockArray[i];
+
+for(var i=0;i<ds_list_size(decideBlocks);i++){
+    var block = decideBlocks[|i];
     var xIndex = scr_getIndexByPos(block.x);
     var yIndex = scr_getIndexByPos(block.y);
     controler.allBlock2dArray[yIndex,xIndex]=block.value;
 }
 var allRemoveBlockList = ds_list_create();
-for(var i=0;i<array_length_1d(activeBlockArray);i++){
-    scr_findRemoveBlockList(allRemoveBlockList,activeBlockArray[i],controler);
+for(var i=0;i<ds_list_size(decideBlocks);i++){
+    scr_findRemoveBlockList(allRemoveBlockList,decideBlocks[|i],controler);
 }
 for(var i=0;i<ds_list_size(allRemoveBlockList);i++){
     var removeArray = allRemoveBlockList[|i];
@@ -27,4 +27,5 @@ for(var i=0;i<ds_list_size(allRemoveBlockList);i++){
         }
     }
 }
+ds_list_destroy(decideBlocks);
 ds_list_destroy(allRemoveBlockList);
