@@ -2,7 +2,7 @@ var controler = argument0;
 var activeShapeMode = controler.activeShapeMode;
 var activeShapeCode = controler.activeShapeCode;
 var posArray;
-if(is_undefined(controler.activeShape)){
+if(is_undefined(controler.activeShape)||ds_list_size(controler.activeShape)==0){
     return 0;
 }
 var startPos = scr_getBaseStartPos(controler.activeShape,activeShapeCode,activeShapeMode);
@@ -46,8 +46,8 @@ var collisionFlag = false;
     }
     if(!collisionFlag){
         for(var i = 0;i<array_height_2d(posArray);i++){
-            controler.activeShape[i].x=posArray[i,0];
-            controler.activeShape[i].y=posArray[i,1];
+            controler.activeShape[|i].x=posArray[i,0];
+            controler.activeShape[|i].y=posArray[i,1];
         }
     }
     

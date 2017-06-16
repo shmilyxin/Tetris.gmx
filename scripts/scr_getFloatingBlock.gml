@@ -45,12 +45,12 @@ if(ds_list_size(totalList)>0){
 if(ds_list_size(totoalFloatingShapeList)>0){
     for(var i = 0;i<ds_list_size(totoalFloatingShapeList);i++){
        var floatingShape = totoalFloatingShapeList[|i];
-       var floatingShapeArray; 
+       var floatingShapeArray = ds_list_create(); 
        for(var j = 0;j<ds_list_size(floatingShape);j++){
             var posArray = scr_splitToArray(floatingShape[|j],'_');
             var blockId = scr_getBlockByPos(posArray);
             if(blockId != noone){
-                floatingShapeArray[j]=blockId; 
+                ds_list_add(floatingShapeArray,blockId); 
             }
        }
        ds_list_add(controler.floatingShapeList,floatingShapeArray);

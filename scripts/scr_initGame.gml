@@ -10,6 +10,10 @@ controler.allBlock2dArray = allBlock2dArray;
 controler.activeShapeCode = irandom_range(1,7);
 controler.activeShapeMode = 1;
 var blockArray = scr_getShape(controler.activeShapeCode,controler.activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
-controler.activeShape = blockArray;
+ds_list_clear(controler.activeShape);
+for(var i=0;i<array_length_1d(blockArray);i++){
+    ds_list_add(controler.activeShape,blockArray[i]);
+}
+
 controler.nextShape = irandom_range(1,7);
 controler.alarm[0] = controler.gameSpeed;

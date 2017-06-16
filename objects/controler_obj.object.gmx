@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>activeShape = undefined;
+            <string>activeShape = ds_list_create();
 floatingShapeList = ds_list_create();
 activeShapeCode = undefined;
 activeShapeMode = 1;
@@ -95,8 +95,8 @@ scr_initGame(id);
             <string> if(ds_list_size(floatingShapeList)&gt;0){
     for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
             var floatingShape = floatingShapeList[|i];
-            for(var j = 0;j&lt;array_length_1d(floatingShape);j++){
-                var block = floatingShape[j];
+            for(var j = 0;j&lt;ds_list_size(floatingShape);j++){
+                var block = floatingShape[|j];
                 if(!is_undefined(block)){
                     scr_addDebugStr(string(scr_getIndexByPos(block.x))+"_"+string(scr_getIndexByPos(block.y)),10);
                 }
@@ -109,8 +109,8 @@ scr_initGame(id);
         for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
             var collisionFlag = false;
             var floatingShape = floatingShapeList[|i];
-            for(var j = 0;j&lt;array_length_1d(floatingShape);j++){
-                var block = floatingShape[j];
+            for(var j = 0;j&lt;ds_list_size(floatingShape);j++){
+                var block = floatingShape[|j];
                 var nextStepY = block.y+30;
                 collisionFlag = scr_checkPointCollision(block.x,nextStepY,id.allBlock2dArray);
                 if(collisionFlag){
@@ -118,17 +118,18 @@ scr_initGame(id);
                 }
             }
             if(collisionFlag){
-                for(var j = 0;j&lt;array_length_1d(floatingShape);j++){
-                    ds_list_add(decideBlocks,floatingShape[j]);
+                for(var j = 0;j&lt;ds_list_size(floatingShape);j++){
+                    ds_list_add(decideBlocks,floatingShape[|j]);
                 }
                 ds_list_delete(floatingShapeList,i);
+                ds_list_destroy(floatingShape);
             }
         }
    }else{
         var collisionFlag = false;
-        var length =  array_length_1d(activeShape);
+        var length =  ds_list_size(activeShape);
         for(var i = 0;i&lt;length;i++){
-            var block = activeShape[i];
+            var block = activeShape[|i];
             var nextStepY = block.y+30;
             collisionFlag = scr_checkPointCollision(block.x,nextStepY,id.allBlock2dArray);
             if(collisionFlag){
@@ -136,10 +137,10 @@ scr_initGame(id);
             }
         }
         if(collisionFlag){
-            for(var j = 0;j&lt;array_length_1d(activeShape);j++){
-                ds_list_add(decideBlocks,activeShape[j]);
+            for(var j = 0;j&lt;ds_list_size(activeShape);j++){
+                ds_list_add(decideBlocks,activeShape[|j]);
             }
-            activeShape = undefined;
+            ds_list_clear(activeShape);
         }
    }
    if(ds_list_size(decideBlocks)==0){
@@ -147,14 +148,14 @@ scr_initGame(id);
     
         for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
         var shape = floatingShapeList[|i];
-            for(var j=0;j&lt;array_length_1d(shape);j++){
-                var block = shape[j];
+            for(var j=0;j&lt;ds_list_size(shape);j++){
+                var block = shape[|j];
                 block.y+=30;  
             }    
         }
-    }else if(activeShape!=undefined){
-        for(var i = 0;i&lt;array_length_1d(activeShape);i++){
-                var block = activeShape[i];
+    }else if(ds_list_size(activeShape)&gt;0){
+        for(var i = 0;i&lt;ds_list_size(activeShape);i++){
+                var block = activeShape[|i];
                 block.y+=30;  
         }   
     }
@@ -162,7 +163,11 @@ scr_initGame(id);
       src_blockDecide(id,decideBlocks);
       scr_getFloatingBlock(id);
       if(ds_list_size(floatingShapeList)==0){
-        activeShape = scr_getShape(nextShape,activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
+        var blockArray = scr_getShape(nextShape,activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
+        ds_list_clear(activeShape);
+        for(var i=0;i&lt;array_length_1d(blockArray);i++){
+            ds_list_add(activeShape,blockArray[i]);
+        }
         activeShapeCode = nextShape;
         activeShapeMode = 1;
         nextShape = irandom_range(1,7);
