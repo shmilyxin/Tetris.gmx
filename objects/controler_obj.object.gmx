@@ -92,7 +92,8 @@ scr_initGame(id);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string> if(ds_list_size(floatingShapeList)&gt;0){
+            <string> /**
+ if(ds_list_size(floatingShapeList)&gt;0){
     for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
             var floatingShape = floatingShapeList[|i];
             for(var j = 0;j&lt;ds_list_size(floatingShape);j++){
@@ -103,7 +104,7 @@ scr_initGame(id);
             }
             
         }
- }
+ }*/
    var decideBlocks = ds_list_create();
    if(ds_list_size(floatingShapeList)&gt;0){
         for(var i = 0;i&lt;ds_list_size(floatingShapeList);i++){
@@ -198,7 +199,8 @@ alarm[0] = gameSpeed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scr_clearDebugStr();
+            <string>/**
+scr_clearDebugStr();
 for(var i = 1;i&lt;21;i++){
     for(var j = 1;j&lt;11;j++){
         if(allBlock2dArray[i,j] == 0){
@@ -208,7 +210,7 @@ for(var i = 1;i&lt;21;i++){
         }
        
     }
-}
+}*/
 if keyboard_check(ord('D'))
 {
    rightFlag = 1;
