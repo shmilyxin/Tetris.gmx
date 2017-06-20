@@ -16,41 +16,23 @@
   </sprites>
   <backgrounds name="background">
     <background>background\background_bgr</background>
+    <background>background\background1</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="util">
-      <script>scripts\scr_initGame.gml</script>
-      <script>scripts\scr_defGlobal.gml</script>
       <script>scripts\scr_arrayContainObj.gml</script>
-      <script>scripts\scr_splitToList.gml</script>
-      <script>scripts\scr_getPosByIndex.gml</script>
-      <script>scripts\scr_splitToArray.gml</script>
-      <script>scripts\scr_splitTo2DArray.gml</script>
-      <script>scripts\scr_changeOffsetToPosArray.gml</script>
-      <script>scripts\scr_getIndexByPos.gml</script>
       <script>scripts\scr_arrayToStr.gml</script>
+      <script>scripts\scr_changeOffsetToPosArray.gml</script>
+      <script>scripts\scr_defGlobal.gml</script>
+      <script>scripts\scr_getIndexByPos.gml</script>
+      <script>scripts\scr_getPosByIndex.gml</script>
+      <script>scripts\scr_initGame.gml</script>
+      <script>scripts\scr_splitTo2DArray.gml</script>
+      <script>scripts\scr_splitToArray.gml</script>
+      <script>scripts\scr_splitToList.gml</script>
     </scripts>
     <scripts name="block">
-      <script>scripts\scr_getBlockObjByKey.gml</script>
-      <script>scripts\scr_getBlockByPos.gml</script>
-      <script>scripts\scr_getBlockByKey.gml</script>
-      <script>scripts\scr_getShape.gml</script>
-      <script>scripts\scr_shapeMove.gml</script>
-      <script>scripts\scr_getShapePos.gml</script>
-      <script>scripts\scr_checkPointCollision.gml</script>
-      <script>scripts\scr_getBlockArray.gml</script>
-      <script>scripts\scr_checkBlockClearAble.gml</script>
-      <script>scripts\scr_getBaseStartPos.gml</script>
-      <scripts name="shape">
-        <script>scripts\scr_createRLShape.gml</script>
-        <script>scripts\scr_createIShape.gml</script>
-        <script>scripts\scr_createOShape.gml</script>
-        <script>scripts\scr_createTShape.gml</script>
-        <script>scripts\scr_createRZShape.gml</script>
-        <script>scripts\scr_createLZShape.gml</script>
-        <script>scripts\scr_createLLShape.gml</script>
-      </scripts>
       <scripts name="change">
         <script>scripts\scr_changeShape.gml</script>
       </scripts>
@@ -68,10 +50,31 @@
         <script>scripts\scr_getFloatingBlock.gml</script>
         <script>scripts\src_blockDecide.gml</script>
       </scripts>
+      <script>scripts\scr_checkBlockClearAble.gml</script>
+      <script>scripts\scr_checkPointCollision.gml</script>
+      <script>scripts\scr_getBaseStartPos.gml</script>
+      <script>scripts\scr_getBlockArray.gml</script>
+      <script>scripts\scr_getBlockByKey.gml</script>
+      <script>scripts\scr_getBlockByPos.gml</script>
+      <script>scripts\scr_getBlockObjByKey.gml</script>
+      <script>scripts\scr_getShape.gml</script>
+      <script>scripts\scr_getShapePos.gml</script>
+      <script>scripts\scr_initNextShape.gml</script>
+      <script>scripts\scr_shapeMove.gml</script>
+      <scripts name="shape">
+        <script>scripts\scr_createRLShape.gml</script>
+        <script>scripts\scr_createIShape.gml</script>
+        <script>scripts\scr_createOShape.gml</script>
+        <script>scripts\scr_createTShape.gml</script>
+        <script>scripts\scr_createRZShape.gml</script>
+        <script>scripts\scr_createLZShape.gml</script>
+        <script>scripts\scr_createLLShape.gml</script>
+      </scripts>
     </scripts>
     <scripts name="debug">
       <script>scripts\scr_addDebugStr.gml</script>
       <script>scripts\scr_clearDebugStr.gml</script>
+      <script>scripts\scr_initDefaultBlock.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -88,6 +91,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
+    <room>rooms\room1</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

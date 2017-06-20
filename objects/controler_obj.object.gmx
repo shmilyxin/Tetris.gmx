@@ -30,7 +30,8 @@ floatingShapeList = ds_list_create();
 activeShapeCode = undefined;
 activeShapeMode = 1;
 gameSpeed = 20;
-nextShape = undefined;
+nextShapeCode = undefined;
+nextShape = ds_list_create();
 allBlock2dArray = undefined;
 
 rightFlag = 0;      //右是否按下 0为否 1为是
@@ -69,7 +70,6 @@ scr_initGame(id);
           <argument>
             <kind>1</kind>
             <string>moveableFlag = 1;
-
 </string>
           </argument>
         </arguments>
@@ -163,14 +163,15 @@ scr_initGame(id);
       src_blockDecide(id,decideBlocks);
       scr_getFloatingBlock(id);
       if(ds_list_size(floatingShapeList)==0){
-        var blockArray = scr_getShape(nextShape,activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
+        var blockArray = scr_getShape(nextShapeCode,activeShapeMode,scr_getPosByIndex(5),scr_getPosByIndex(1));
         ds_list_clear(activeShape);
         for(var i=0;i&lt;array_length_1d(blockArray);i++){
             ds_list_add(activeShape,blockArray[i]);
         }
-        activeShapeCode = nextShape;
+        activeShapeCode = nextShapeCode;
         activeShapeMode = 1;
-        nextShape = irandom_range(1,7);
+        nextShapeCode = irandom_range(1,7);
+        scr_initNextShape(id);
       }
    }
 ds_list_destroy(decideBlocks);
